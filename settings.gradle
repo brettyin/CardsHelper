@@ -1,1 +1,1 @@
-include ':app', ':cardsdaogenerator', ':daogenerator'
+include ':app', ':daogenerator'

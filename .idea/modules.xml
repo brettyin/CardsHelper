@@ -3,8 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CardsHelper.iml" filepath="$PROJECT_DIR$/CardsHelper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CardsHelper.iml" filepath="$PROJECT_DIR$/CardsHelper.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/cardsdaogenerator/cardsdaogenerator.iml" filepath="$PROJECT_DIR$/cardsdaogenerator/cardsdaogenerator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/daogenerator/daogenerator.iml" filepath="$PROJECT_DIR$/daogenerator/daogenerator.iml" />
     </modules>
   </component>

@@ -18,6 +18,8 @@ import com.brettyin.cardshelper.model.PlayerDao;
 import java.util.ArrayList;
 import java.util.List;
 
+import at.markushi.ui.CircleButton;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     List<Player> leaseList;
@@ -26,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btnNext = (Button) findViewById(R.id.btnNext);
+        CircleButton btnNext = (CircleButton) findViewById(R.id.btnNext);
         btnNext.setOnClickListener(this);
 
         RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
