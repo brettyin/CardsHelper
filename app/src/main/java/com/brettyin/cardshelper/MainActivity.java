@@ -1,14 +1,19 @@
 package com.brettyin.cardshelper;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
+import android.widget.Toast;
 
 import com.brettyin.cardshelper.model.DaoMaster;
 import com.brettyin.cardshelper.model.DaoSession;
@@ -22,7 +27,9 @@ import at.markushi.ui.CircleButton;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    List<Player> leaseList;
+    List<Player> playerList;
+    PlayerDao playerDao;
+    RecyclerView recList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,18 +37,99 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         CircleButton btnNext = (CircleButton) findViewById(R.id.btnNext);
         btnNext.setOnClickListener(this);
-
-        RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
+        CircleButton btnAdd = (CircleButton) findViewById(R.id.btnAdd);
+        btnAdd.setOnClickListener(this);
+        recList = (RecyclerView) findViewById(R.id.cardList);
         recList.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
 
         initialDB();
-        ContactAdapter ca = new ContactAdapter(this,leaseList);
+        ContactAdapter ca = new ContactAdapter(this, playerList);
         recList.setAdapter(ca);
 
+        final GestureDetector mGestureDetector = new GestureDetector(MainActivity.this, new GestureDetector.SimpleOnGestureListener() {
 
+            @Override public boolean onSingleTapUp(MotionEvent e) {
+                return false;
+            }
+
+            @Override
+            public void onLongPress(MotionEvent e) {
+               final View child = recList.findChildViewUnder(e.getX(),e.getY());
+                PopupMenu popupMenu = new PopupMenu(MainActivity.this, child);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener(){
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.item_edit:
+                                editPlayer(playerList.get(recList.getChildPosition(child)));
+                                return true;
+                            case R.id.item_delete:
+                                deletePlayer(playerList.get(recList.getChildPosition(child)));
+                                return true;
+
+                        }
+                        return true;
+                    }
+                });
+                popupMenu.inflate(R.menu.popup_menu);
+                popupMenu.show();
+                //Toast.makeText(MainActivity.this, "The  is: " + playerList.get(recList.getChildPosition(child)).getName(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        recList.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+                View child = recyclerView.findChildViewUnder(motionEvent.getX(),motionEvent.getY());
+
+
+
+                if(child!=null && mGestureDetector.onTouchEvent(motionEvent)){
+//                    Drawer.closeDrawers();
+                    Toast.makeText(MainActivity.this, "The Item Clicked is: " + playerList.get(recyclerView.getChildPosition(child)).getName(), Toast.LENGTH_SHORT).show();
+
+                    return true;
+
+                }
+
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
+    }
+
+    private void editPlayer(Player player) {
+        Intent intent =new Intent(this, PlayerActivity.class);
+        intent.putExtra("id",player.getId());
+        startActivity(intent);
+    }
+
+    private void deletePlayer(Player player) {
+        playerDao.delete(player);
+        refreshPlayerList();
+    }
+
+    void refreshPlayerList()
+    {
+        if (playerDao==null)
+            initialDB();
+        else
+        {
+            playerList = playerDao.loadAll();
+            ContactAdapter ca = new ContactAdapter(this, playerList);
+            recList.setAdapter(ca);
+        }
     }
     void initialDB()
     {
@@ -49,28 +137,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SQLiteDatabase db = helper.getWritableDatabase();
         DaoMaster daoMaster = new DaoMaster(db);
         DaoSession daoSession = daoMaster.newSession();
+        ((MyApplication) this.getApplicationContext()).setDaoSession(daoSession);
+        playerDao = daoSession.getPlayerDao();
 
-        PlayerDao playerDao = daoSession.getPlayerDao();
-
-//        Player player=new Player();
-//        player.setName("老郑");
-//        playerDao.insertOrReplace(player);
-//
-//         player=new Player();
-//        player.setName("来军");
-//        playerDao.insertOrReplace(player);
-//
-//         player=new Player();
-//        player.setName("菜菜");
-//        playerDao.insertOrReplace(player);
-//
-//         player=new Player();
-//        player.setName("阿猪");
-//        playerDao.insertOrReplace(player);
-        leaseList = playerDao.loadAll();
+        playerList = playerDao.loadAll();
 
 
     }
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -95,7 +171,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        switch ( v.getId()){
+            case R.id.btnAdd:
+                Intent intent =new Intent(this, PlayerActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btnNext:
+//                Intent intent =new Intent(this, PlayerActivity.class);
+//                startActivity(intent);
+                break;
+        }
 
+    }
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshPlayerList();
     }
 
     private List<ContactInfo> createList(int size) {

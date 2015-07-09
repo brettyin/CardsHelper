@@ -16,10 +16,22 @@
         android:paddingBottom="30dp"
         />
     <at.markushi.ui.CircleButton
+        android:id="@+id/btnAdd"
+        android:layout_width="64dip"
+        android:layout_height="64dip"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/ic_action_add_person"
+        app:cb_color="#8BC34A"
+        app:cb_pressedRingWidth="8dip" />
+    <at.markushi.ui.CircleButton
         android:id="@+id/btnNext"
         android:layout_width="64dip"
         android:layout_height="64dip"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         android:src="@drawable/ic_action_accept"
-        app:cb_color="#99CC00"
+        app:cb_color="#8BC34A"
         app:cb_pressedRingWidth="8dip" />
+
 </RelativeLayout>

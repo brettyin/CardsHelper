@@ -2,6 +2,8 @@ package com.brettyin.cardshelper;
 
 import android.app.Application;
 
+import com.brettyin.cardshelper.model.DaoSession;
+
 import java.util.List;
 
 /**
@@ -18,4 +20,14 @@ public class MyApplication extends Application {
     }
 
     private List<Long> playerIDList;
+
+    DaoSession daoSession;
+
+    public DaoSession getDaoSession() {
+        return daoSession;
+    }
+
+    public void setDaoSession(DaoSession daoSession) {
+        this.daoSession = daoSession;
+    }
 }
