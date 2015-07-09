@@ -171,14 +171,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch ( v.getId()){
             case R.id.btnAdd:
-                Intent intent =new Intent(this, PlayerActivity.class);
+                intent =new Intent(this, PlayerActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btnNext:
-//                Intent intent =new Intent(this, PlayerActivity.class);
-//                startActivity(intent);
+                intent =new Intent(this, GameSettingsActivity.class);
+                startActivity(intent);
                 break;
         }
 

@@ -1,0 +1,144 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.brettyin.cardshelper.GameSettingsActivity">
+
+    <TextView
+        android:id="@+id/txtNumberOfPlayer"
+        android:text="Number of players:   " android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingTop="10dp"
+        />
+
+
+        <com.rey.material.widget.RadioButton
+            android:id="@+id/radioFive"
+            android:layout_toRightOf="@id/txtNumberOfPlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5 Players"
+            android:checked="true"
+            android:gravity="center_vertical"
+            android:layout_alignBaseline="@id/txtNumberOfPlayer"/>
+
+        <com.rey.material.widget.RadioButton
+            android:id="@+id/radioSix"
+            android:layout_toRightOf="@id/radioFive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6 Players"
+            android:gravity="center_vertical"
+            android:layout_alignBaseline="@id/txtNumberOfPlayer"
+            />
+    <TextView
+        android:id="@+id/txtNumberOfCards"
+        android:text="Number of card sets:   " android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingTop="20dp"
+        android:layout_below="@id/txtNumberOfPlayer"
+
+        />
+
+
+    <com.rey.material.widget.RadioButton
+        android:id="@+id/radioCardsTwo"
+        android:layout_below="@id/radioFive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2 decks"
+        android:checked="true"
+        android:gravity="center_vertical"
+        android:layout_alignBaseline="@id/txtNumberOfCards"
+        android:layout_alignLeft="@id/radioFive"/>
+
+    <com.rey.material.widget.RadioButton
+        android:id="@+id/radioCardsThree"
+        android:layout_below="@id/radioSix"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3 decks"
+        android:gravity="center_vertical"
+        android:layout_alignBaseline="@id/txtNumberOfCards"
+        android:layout_alignLeft="@id/radioSix"
+        />
+
+    <TextView
+        android:id="@+id/txtScoreForBreak"
+        android:text="Points for Break:   "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingTop="20dp"
+        android:layout_below="@id/txtNumberOfCards"
+
+        />
+
+    <com.rey.material.widget.Spinner
+        style="@style/Material.Widget.Spinner.Light"
+        android:id="@+id/spinner_pointsShangtai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="128dp"
+        app:rd_style="@style/Material.Drawable.Ripple.Wave.Light"
+        app:rd_enable="true"
+        app:rd_delayClick="none"
+        app:spn_labelEnable="false"
+        app:spn_arrowSwitchMode="true"
+        app:spn_arrowAnimDuration="@android:integer/config_shortAnimTime"
+        app:spn_arrowInterpolator="@android:anim/decelerate_interpolator"
+        android:layout_below="@id/radioCardsTwo"
+        android:layout_toRightOf="@id/txtScoreForBreak"
+        android:layout_alignBottom="@id/txtScoreForBreak"
+        />
+
+    <TextView
+        android:id="@+id/txtScoreForJump"
+        android:text="Points for Jump:   "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingTop="20dp"
+        android:layout_below="@id/txtScoreForBreak"
+
+        />
+
+    <com.rey.material.widget.Spinner
+        style="@style/Material.Widget.Spinner.Light"
+        android:id="@+id/spinner_pointsJump"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="128dp"
+        app:rd_style="@style/Material.Drawable.Ripple.Wave.Light"
+        app:rd_enable="true"
+        app:rd_delayClick="none"
+        app:spn_labelEnable="false"
+        app:spn_arrowSwitchMode="true"
+        app:spn_arrowAnimDuration="@android:integer/config_shortAnimTime"
+        app:spn_arrowInterpolator="@android:anim/decelerate_interpolator"
+        android:layout_below="@id/spinner_pointsShangtai"
+        android:layout_toRightOf="@id/txtScoreForJump"
+        android:layout_alignLeft="@id/spinner_pointsShangtai"
+        android:layout_alignBottom="@id/txtScoreForJump"
+        />
+    <at.markushi.ui.CircleButton
+        android:id="@+id/btnNext"
+        android:layout_width="64dip"
+        android:layout_height="64dip"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_action_accept"
+        app:cb_color="#8BC34A"
+        app:cb_pressedRingWidth="8dip" />
+    <!--<com.rey.material.widget.CheckBox-->
+        <!--style="@style/Material.Drawable.CheckBox"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Check box"/>-->
+</RelativeLayout>
