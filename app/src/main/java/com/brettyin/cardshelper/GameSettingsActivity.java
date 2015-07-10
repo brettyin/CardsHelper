@@ -1,5 +1,6 @@
 package com.brettyin.cardshelper;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -55,6 +56,8 @@ public class GameSettingsActivity extends AppCompatActivity {
 
         Toast.makeText(this, app.getSetting_deckNr()+" "+app.getSetting_playerNr()+" "+app.getSetting_pointBreak()+" "+app.getSetting_pointJump(), Toast.LENGTH_LONG).show();
 
+        Intent intent =new Intent(this, GameActivity.class);
+        startActivity(intent);
     }
 
     private void initialSpinnerAndRadios() {

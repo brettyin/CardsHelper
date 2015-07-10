@@ -8,6 +8,7 @@ public class Player {
 
     private Long id;
     private String name;
+    private String Nickname;
     private String pic;
 
     public Player() {
@@ -17,9 +18,10 @@ public class Player {
         this.id = id;
     }
 
-    public Player(Long id, String name, String pic) {
+    public Player(Long id, String name, String Nickname, String pic) {
         this.id = id;
         this.name = name;
+        this.Nickname = Nickname;
         this.pic = pic;
     }
 
@@ -37,6 +39,14 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getNickname() {
+        return Nickname;
+    }
+
+    public void setNickname(String Nickname) {
+        this.Nickname = Nickname;
     }
 
     public String getPic() {

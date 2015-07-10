@@ -14,10 +14,30 @@ public class MyApplication extends Application {
 
     DaoSession daoSession;
 
-    int setting_playerNr;
-    int setting_deckNr;
-    int setting_pointBreak;
-    int setting_pointJump;
+    int setting_playerNr=5;
+    int setting_deckNr=2;
+    int setting_pointBreak=100;
+    int setting_pointJump=40;
+
+    int currentGameGroup;
+
+    public int getCurrentGameGroup() {
+        return currentGameGroup;
+    }
+
+    public void setCurrentGameGroup(int currentGameGroup) {
+        this.currentGameGroup = currentGameGroup;
+    }
+
+    public int getCurrentGameNr() {
+        return currentGameNr;
+    }
+
+    public void setCurrentGameNr(int currentGameNr) {
+        this.currentGameNr = currentGameNr;
+    }
+
+    int currentGameNr;
 
     public int getSetting_playerNr() {
         return setting_playerNr;

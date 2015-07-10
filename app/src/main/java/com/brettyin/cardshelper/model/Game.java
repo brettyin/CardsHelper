@@ -12,6 +12,8 @@ public class Game {
 
     private Long id;
     private Integer Score;
+    private Integer Group;
+    private Integer Nr;
     private java.util.Date Date;
 
     /** Used to resolve relations */
@@ -29,9 +31,11 @@ public class Game {
         this.id = id;
     }
 
-    public Game(Long id, Integer Score, java.util.Date Date) {
+    public Game(Long id, Integer Score, Integer Group, Integer Nr, java.util.Date Date) {
         this.id = id;
         this.Score = Score;
+        this.Group = Group;
+        this.Nr = Nr;
         this.Date = Date;
     }
 
@@ -55,6 +59,22 @@ public class Game {
 
     public void setScore(Integer Score) {
         this.Score = Score;
+    }
+
+    public Integer getGroup() {
+        return Group;
+    }
+
+    public void setGroup(Integer Group) {
+        this.Group = Group;
+    }
+
+    public Integer getNr() {
+        return Nr;
+    }
+
+    public void setNr(Integer Nr) {
+        this.Nr = Nr;
     }
 
     public java.util.Date getDate() {

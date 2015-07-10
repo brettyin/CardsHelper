@@ -25,7 +25,8 @@ public class PlayerDao extends AbstractDao<Player, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
-        public final static Property Pic = new Property(2, String.class, "pic", false, "PIC");
+        public final static Property Nickname = new Property(2, String.class, "Nickname", false, "NICKNAME");
+        public final static Property Pic = new Property(3, String.class, "pic", false, "PIC");
     };
 
 
@@ -43,7 +44,8 @@ public class PlayerDao extends AbstractDao<Player, Long> {
         db.execSQL("CREATE TABLE " + constraint + "'PLAYER' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
                 "'NAME' TEXT," + // 1: name
-                "'PIC' TEXT);"); // 2: pic
+                "'NICKNAME' TEXT," + // 2: Nickname
+                "'PIC' TEXT);"); // 3: pic
     }
 
     /** Drops the underlying database table. */
@@ -67,9 +69,14 @@ public class PlayerDao extends AbstractDao<Player, Long> {
             stmt.bindString(2, name);
         }
  
+        String Nickname = entity.getNickname();
+        if (Nickname != null) {
+            stmt.bindString(3, Nickname);
+        }
+ 
         String pic = entity.getPic();
         if (pic != null) {
-            stmt.bindString(3, pic);
+            stmt.bindString(4, pic);
         }
     }
 
@@ -85,7 +92,8 @@ public class PlayerDao extends AbstractDao<Player, Long> {
         Player entity = new Player( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // pic
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // Nickname
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // pic
         );
         return entity;
     }
@@ -95,7 +103,8 @@ public class PlayerDao extends AbstractDao<Player, Long> {
     public void readEntity(Cursor cursor, Player entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setPic(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setNickname(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setPic(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
      }
     
     /** @inheritdoc */

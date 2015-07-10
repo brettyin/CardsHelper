@@ -25,7 +25,9 @@ public class GameDao extends AbstractDao<Game, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Score = new Property(1, Integer.class, "Score", false, "SCORE");
-        public final static Property Date = new Property(2, java.util.Date.class, "Date", false, "DATE");
+        public final static Property Group = new Property(2, Integer.class, "Group", false, "GROUP");
+        public final static Property Nr = new Property(3, Integer.class, "Nr", false, "NR");
+        public final static Property Date = new Property(4, java.util.Date.class, "Date", false, "DATE");
     };
 
     private DaoSession daoSession;
@@ -46,7 +48,9 @@ public class GameDao extends AbstractDao<Game, Long> {
         db.execSQL("CREATE TABLE " + constraint + "'GAME' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
                 "'SCORE' INTEGER," + // 1: Score
-                "'DATE' INTEGER);"); // 2: Date
+                "'GROUP' INTEGER," + // 2: Group
+                "'NR' INTEGER," + // 3: Nr
+                "'DATE' INTEGER);"); // 4: Date
     }
 
     /** Drops the underlying database table. */
@@ -70,9 +74,19 @@ public class GameDao extends AbstractDao<Game, Long> {
             stmt.bindLong(2, Score);
         }
  
+        Integer Group = entity.getGroup();
+        if (Group != null) {
+            stmt.bindLong(3, Group);
+        }
+ 
+        Integer Nr = entity.getNr();
+        if (Nr != null) {
+            stmt.bindLong(4, Nr);
+        }
+ 
         java.util.Date Date = entity.getDate();
         if (Date != null) {
-            stmt.bindLong(3, Date.getTime());
+            stmt.bindLong(5, Date.getTime());
         }
     }
 
@@ -94,7 +108,9 @@ public class GameDao extends AbstractDao<Game, Long> {
         Game entity = new Game( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1), // Score
-            cursor.isNull(offset + 2) ? null : new java.util.Date(cursor.getLong(offset + 2)) // Date
+            cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2), // Group
+            cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // Nr
+            cursor.isNull(offset + 4) ? null : new java.util.Date(cursor.getLong(offset + 4)) // Date
         );
         return entity;
     }
@@ -104,7 +120,9 @@ public class GameDao extends AbstractDao<Game, Long> {
     public void readEntity(Cursor cursor, Game entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setScore(cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1));
-        entity.setDate(cursor.isNull(offset + 2) ? null : new java.util.Date(cursor.getLong(offset + 2)));
+        entity.setGroup(cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2));
+        entity.setNr(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
+        entity.setDate(cursor.isNull(offset + 4) ? null : new java.util.Date(cursor.getLong(offset + 4)));
      }
     
     /** @inheritdoc */
