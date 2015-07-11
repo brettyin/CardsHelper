@@ -13,6 +13,9 @@ public class MyApplication extends Application {
     private List<Long> playerIDList;
 
     DaoSession daoSession;
+    MainActivity mainActivity;
+
+
 
     int setting_playerNr=5;
     int setting_deckNr=2;
@@ -21,6 +24,52 @@ public class MyApplication extends Application {
 
     int currentGameGroup;
 
+    boolean isNewGame=false;
+    int points;
+    List<Long> gamePlayerIDList;
+    List<Long> gameDealerHelperiDList;
+
+    public Long getGameDealerID() {
+        return gameDealerID;
+    }
+
+    public void setGameDealerID(Long gameDealerID) {
+        this.gameDealerID = gameDealerID;
+    }
+
+    public boolean isNewGame() {
+        return isNewGame;
+    }
+
+    public void setIsNewGame(boolean isNewGame) {
+        this.isNewGame = isNewGame;
+    }
+
+    public int getGamePoints() {
+        return points;
+    }
+
+    public void setGamePoints(int points) {
+        this.points = points;
+    }
+
+    public List<Long> getGamePlayerIDList() {
+        return gamePlayerIDList;
+    }
+
+    public void setGamePlayerIDList(List<Long> gamePlayerIDList) {
+        this.gamePlayerIDList = gamePlayerIDList;
+    }
+
+    public List<Long> getGameDealerHelperiDList() {
+        return gameDealerHelperiDList;
+    }
+
+    public void setGameDealerHelperiDList(List<Long> gameDealerHelperiDList) {
+        this.gameDealerHelperiDList = gameDealerHelperiDList;
+    }
+
+    Long gameDealerID;
     public int getCurrentGameGroup() {
         return currentGameGroup;
     }
@@ -87,5 +136,13 @@ public class MyApplication extends Application {
 
     public void setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
+    }
+
+    public MainActivity getMainActivity() {
+        return mainActivity;
+    }
+
+    public void setMainActivity(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
     }
 }

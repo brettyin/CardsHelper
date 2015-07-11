@@ -2,6 +2,9 @@ package com.brettyin.cardshelper;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,13 +33,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     List<Player> playerList;
     PlayerDao playerDao;
     RecyclerView recList;
+    Drawable btnColor;
+
+    CircleButton btnNext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        CircleButton btnNext = (CircleButton) findViewById(R.id.btnNext);
+        btnNext = (CircleButton) findViewById(R.id.btnNext);
         btnNext.setOnClickListener(this);
+
+        btnColor=btnNext.getBackground();
+        changeBtn(false);
+
         CircleButton btnAdd = (CircleButton) findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(this);
 
@@ -49,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initialDB();
         ContactAdapter ca = new ContactAdapter(this, playerList);
         recList.setAdapter(ca);
+
+        ((MyApplication) this.getApplicationContext()).setMainActivity(this);
 
         final GestureDetector mGestureDetector = new GestureDetector(MainActivity.this, new GestureDetector.SimpleOnGestureListener() {
 
@@ -186,7 +198,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    public void changeBtn(boolean isEnable)
+    {
+        btnNext.setEnabled(isEnable);
+        if (isEnable)
+            btnNext.setColorFilter(null);
+        else
+            btnNext.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
 
+
+    }
 
     @Override
     protected void onResume() {

@@ -54,12 +54,18 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
                     idList.remove(contact.getId());
                 }
 
-                ( (MyApplication) mContext.getApplicationContext()).setPlayerIDList(idList);
+                MyApplication myApplication=(MyApplication) mContext.getApplicationContext();
+                myApplication.setPlayerIDList(idList);
+                if (idList.size()>=5 && idList.size()<=6)
+                    myApplication.getMainActivity().changeBtn(true);
+                else
+                    myApplication.getMainActivity().changeBtn(false);
                 //contact.setSelected(cb.isChecked());
                 //stList.get(pos).setSelected(cb.isChecked());
-                String players="";
+
+                /*String players="";
                 for (Player p:contactList) {
-                    if (( (MyApplication) mContext.getApplicationContext()).getPlayerIDList().contains(p.getId()))
+                    if (myApplication.getPlayerIDList().contains(p.getId()))
                     {
                         players+=p.getName()+"; ";
                     }
@@ -67,7 +73,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
                 Toast.makeText(
                         v.getContext(),
-                        "Selected players: "+players, Toast.LENGTH_LONG).show();
+                        "Selected players: "+players, Toast.LENGTH_LONG).show();*/
             }
         });
     }
