@@ -1,5 +1,6 @@
 package com.brettyin.cardshelper;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -9,7 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PopupMenu;
+import android.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.Menu;
@@ -29,7 +30,7 @@ import java.util.List;
 import at.markushi.ui.CircleButton;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends Activity implements View.OnClickListener {
     List<Player> playerList;
     PlayerDao playerDao;
     RecyclerView recList;

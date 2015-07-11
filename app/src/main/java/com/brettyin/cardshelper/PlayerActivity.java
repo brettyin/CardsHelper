@@ -1,5 +1,6 @@
 package com.brettyin.cardshelper;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,22 +10,29 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.brettyin.cardshelper.fragment.SignInFragment;
 import com.brettyin.cardshelper.model.DaoSession;
 import com.brettyin.cardshelper.model.Player;
 import com.brettyin.cardshelper.model.PlayerDao;
+import com.brettyin.cardshelper.widget.fab.DoneFab;
 
 import at.markushi.ui.CircleButton;
 
-public class PlayerActivity extends AppCompatActivity {
+public class PlayerActivity extends Activity {
     EditText ediName;
-    Long playerID;
+    public Long playerID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_player);
-        ediName=(EditText)findViewById(R.id.ediName);
+        setContentView(R.layout.activity_player_edit);
         Intent intent = getIntent();
         playerID=intent.getLongExtra("id",-1);
+        if (savedInstanceState == null) {
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.sign_in_container, SignInFragment.newInstance(true)).commit();
+        }
+        /*
+
         if (playerID>-1)
         {
             DaoSession daoSession= ((MyApplication) this.getApplicationContext()).getDaoSession();
@@ -33,18 +41,19 @@ public class PlayerActivity extends AppCompatActivity {
             ediName.setText(player.getName());
         }
 
-        CircleButton btnOK=(CircleButton)findViewById(R.id.btnNext);
+        DoneFab btnOK=(DoneFab)findViewById(R.id.done);
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addPlayer();
             }
         });
+        */
     }
 
     private void addPlayer()
     {
-        ediName=(EditText)findViewById(R.id.ediName);
+        ediName=(EditText)findViewById(R.id.first_name);
         if (ediName.getText().length()>0)
         {
             DaoSession daoSession= ((MyApplication) this.getApplicationContext()).getDaoSession();
