@@ -6,15 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.brettyin.cardshelper.model.Avatar;
 import com.brettyin.cardshelper.model.Game;
 import com.brettyin.cardshelper.model.GameToPlayer;
 import com.brettyin.cardshelper.model.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by XYin on 08.07.2015.
@@ -41,7 +46,21 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ContactViewHol
         final GameToPlayer game = gameList.get(i);
         contactViewHolder.vName.setText(String.valueOf(game.getPlayer().getName()));
         contactViewHolder.vNickname.setText(String.valueOf(game.getPlayer().getName()));
-        contactViewHolder.vLevel.setText(String.valueOf(game.getLevel()));
+        int level=game.getLevel();
+        int plusnr=level/13;
+        if(plusnr>0)
+        {
+            contactViewHolder.vPlus1.setVisibility(View.VISIBLE);
+            if(plusnr>1)
+            {
+                contactViewHolder.vPlus2.setVisibility(View.VISIBLE);
+
+            }
+        }
+        Random rn = new Random();
+         level=(14-level)*4+ rn.nextInt(4)+1;
+        contactViewHolder.vLevel.setImageResource( mContext.getResources().getIdentifier("c"+String.valueOf(level) , "drawable", mContext.getPackageName()));
+        contactViewHolder.vAvatar.setImageResource(Avatar.values()[Integer.valueOf(game.getPlayer().getPic())].getDrawableId());
         //contactViewHolder.chkSelected.setTag(gameList.get(i));
         //contactViewHolder.vSurname.setText(ci.surname);
         //contactViewHolder.vEmail.setText(ci.email);
@@ -89,13 +108,18 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ContactViewHol
 
         protected TextView vName;
         protected TextView vNickname;
-        protected TextView vLevel;
-
+        protected ImageView vLevel,vPlus1, vPlus2;
+        protected CircleImageView vAvatar;
         public ContactViewHolder(View v) {
             super(v);
             vName =  (TextView) v.findViewById(R.id.gamePlayerName);
             vNickname = (TextView)  v.findViewById(R.id.gamePlayerNick);
-            vLevel = (TextView)  v.findViewById(R.id.gamePlayerLevel);
+            vLevel = (ImageView)  v.findViewById(R.id.game_levelimg);
+            vAvatar=(CircleImageView)v.findViewById(R.id.game_profile_image);
+            vPlus1 = (ImageView)  v.findViewById(R.id.game_plus1);
+
+            vPlus2 = (ImageView)  v.findViewById(R.id.game_plus2);
+
 
         }
     }

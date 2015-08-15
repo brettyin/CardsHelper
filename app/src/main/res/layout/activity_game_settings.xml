@@ -13,7 +13,7 @@
         android:text="Number of players:   " android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:paddingTop="10dp"
+        android:paddingTop="40dp"
         />
 
 
@@ -41,7 +41,7 @@
         android:text="Number of card sets:   " android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:paddingTop="20dp"
+        android:paddingTop="40dp"
         android:layout_below="@id/txtNumberOfPlayer"
 
         />
@@ -75,7 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:paddingTop="20dp"
+        android:paddingTop="40dp"
         android:layout_below="@id/txtNumberOfCards"
 
         />
@@ -93,10 +93,10 @@
         app:spn_arrowSwitchMode="true"
         app:spn_arrowAnimDuration="@android:integer/config_shortAnimTime"
         app:spn_arrowInterpolator="@android:anim/decelerate_interpolator"
-        android:layout_below="@id/radioCardsTwo"
         android:layout_toRightOf="@id/txtScoreForBreak"
         android:layout_alignBottom="@id/txtScoreForBreak"
-        />
+        android:paddingTop="18dp"
+        android:layout_below="@+id/txtNumberOfCards" />
 
     <TextView
         android:id="@+id/txtScoreForJump"
@@ -104,7 +104,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:paddingTop="20dp"
+        android:paddingTop="40dp"
         android:layout_below="@id/txtScoreForBreak"
 
         />
@@ -125,8 +125,8 @@
         android:layout_below="@id/spinner_pointsShangtai"
         android:layout_toRightOf="@id/txtScoreForJump"
         android:layout_alignLeft="@id/spinner_pointsShangtai"
-        android:layout_alignBottom="@id/txtScoreForJump"
-        />
+        android:layout_alignBottom="@+id/txtScoreForJump"
+        android:paddingTop="18dp" />
     <at.markushi.ui.CircleButton
         android:id="@+id/btnNext"
         android:layout_width="64dip"
@@ -134,7 +134,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:src="@drawable/ic_action_accept"
-        app:cb_color="#8BC34A"
+        app:cb_color="@color/topeka_primary_dark"
         app:cb_pressedRingWidth="8dip" />
     <!--<com.rey.material.widget.CheckBox-->
         <!--style="@style/Material.Drawable.CheckBox"-->

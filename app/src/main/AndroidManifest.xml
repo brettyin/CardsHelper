@@ -19,18 +19,22 @@
         </activity>
         <activity
             android:name=".PlayerActivity"
+            android:windowSoftInputMode="adjustPan"
             android:label="@string/title_activity_player" >
         </activity>
 
         <activity
+            android:theme="@style/Theme.AppCompat.Light"
             android:name=".GameSettingsActivity"
             android:label="@string/title_activity_game_settings" >
         </activity>
         <activity
+            android:theme="@style/Theme.AppCompat.Light"
             android:name=".GameActivity"
             android:label="@string/title_activity_game" >
         </activity>
         <activity
+            android:theme="@style/Theme.AppCompat.Light"
             android:name=".NewGameActivity"
             android:label="@string/title_activity_new_game" >
         </activity>

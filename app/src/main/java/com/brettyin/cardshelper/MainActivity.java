@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -53,9 +54,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         recList = (RecyclerView) findViewById(R.id.cardList);
         recList.setHasFixedSize(true);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recList.setLayoutManager(llm);
+     /*   LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);*/
+        recList.addItemDecoration(new MarginDecoration(this));
+        recList.setLayoutManager(new GridLayoutManager(this, 2));
 
         initialDB();
         ContactAdapter ca = new ContactAdapter(this, playerList);

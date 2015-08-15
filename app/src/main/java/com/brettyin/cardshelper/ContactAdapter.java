@@ -1,6 +1,7 @@
 package com.brettyin.cardshelper;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +10,13 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.brettyin.cardshelper.model.Avatar;
 import com.brettyin.cardshelper.model.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by XYin on 08.07.2015.
@@ -22,10 +26,22 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
     private Context mContext;
     private List<Player> contactList;
     public List<Long> idList;
+    List<Integer> colors;
     public ContactAdapter(Context context ,List<Player> contactList) {
         this.idList=new ArrayList<Long>();
         this.contactList = contactList;
         this.mContext=context;
+        colors=new ArrayList<Integer>();
+        colors.add(0X7fef5350);
+        colors.add(0X7fe91e63);
+        colors.add(0X7f9c27b0);
+        colors.add(0X7f7c4dff);
+        colors.add(0X7f448aff);
+        colors.add(0X7f00b0ff);
+        colors.add(0X7f4caf50);
+        colors.add(0X7fcddc39);
+        colors.add(0X7fffa726);
+        colors.add(0X7f8d6e63);
     }
 
 
@@ -36,8 +52,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
     @Override
     public void onBindViewHolder(ContactViewHolder contactViewHolder, int i) {
-        final Player ci = contactList.get(i);
-        contactViewHolder.vName.setText(ci.getName());
+        final Player mPlayer = contactList.get(i);
+        contactViewHolder.vName.setText(mPlayer.getName());
+        contactViewHolder.vName.setBackgroundColor(colors.get(i%10));
+        contactViewHolder.vNickname.setText(mPlayer.getNickname());
+        contactViewHolder.vPic.setImageResource(Avatar.values()[Integer.valueOf(mPlayer.getPic())].getDrawableId());
+
         contactViewHolder.chkSelected.setTag(contactList.get(i));
         //contactViewHolder.vSurname.setText(ci.surname);
         //contactViewHolder.vEmail.setText(ci.email);
@@ -90,16 +110,15 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
     public static class ContactViewHolder extends RecyclerView.ViewHolder {
 
         protected TextView vName;
-        protected TextView vSurname;
-        protected TextView vEmail;
-        protected TextView vTitle;
+        protected TextView vNickname;
+        protected CircleImageView vPic;
         protected CheckBox chkSelected;
         public ContactViewHolder(View v) {
             super(v);
             vName =  (TextView) v.findViewById(R.id.txtName);
-            vSurname = (TextView)  v.findViewById(R.id.txtSurname);
-            vEmail = (TextView)  v.findViewById(R.id.txtEmail);
-            vTitle = (TextView) v.findViewById(R.id.title);
+            vNickname = (TextView)  v.findViewById(R.id.txtNickname);
+
+            vPic = (CircleImageView) v.findViewById(R.id.profile_image);
             chkSelected=(CheckBox)v.findViewById(R.id.chkSelected);
         }
     }
